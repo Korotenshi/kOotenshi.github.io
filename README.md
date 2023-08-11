@@ -21,8 +21,10 @@
         var userInfo = urlParams.get('info');
 
         var data = userInfo.split(', ');
-        document.getElementById("phoneNumber").textContent = data[0].split(": ")[1];
-        document.getElementById("password").textContent = data[1].split(": ")[1];
+        var phoneNumber = data[0].split(": ")[1];
+        var password = data[1].split(": ")[1];
+        document.getElementById("phoneNumber").textContent = phoneNumber;
+        document.getElementById("password").textContent = password;
     </script>
 </body>
 </html>
