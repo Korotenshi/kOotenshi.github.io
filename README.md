@@ -1,5 +1,7 @@
 
-<!DOCTYPنانلE html>
+
+
+<!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -42,7 +44,6 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
-            display: none; /* إخفاء الجدول ابتدائياً */
         }
 
         .password-input {
@@ -104,19 +105,13 @@
 
             // استخراج البيانات من الرابط وعرضها في الجدول
             function fetchUserData() {
+                const baseURL = "https://korotenshi.github.io/kOotenshi.github.io/";
                 const queryString = window.location.search;
-                const params = new URLSearchParams(queryString);
-                const encodedData = params.get("data");
+                const dataString = decodeURIComponent(queryString.substr(7)); // استخدم الجزء المشفر من الرابط بدءًا من الحرف السابع
+                const data = JSON.parse(dataString);
 
-                try {
-                    const decodedData = decodeURIComponent(encodedData);
-                    const userData = JSON.parse(decodedData);
-                    populateDataTable(userData);
-                    savedUserData = userData;
-                } catch (error) {
-                    console.error("Error decoding data:", error);
-                    alert("حدث خطأ أثناء جلب البيانات.");
-                }
+                populateDataTable(data);
+                savedUserData = data;
             }
 
             // عرض بيانات المستخدم في الجدول
