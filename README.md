@@ -1,4 +1,5 @@
 
+<!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -67,9 +68,13 @@
 </head>
 <body>
     <div class="data-container">
+        <!-- مُبدأ إخطار المستخدم -->
         <div class="notification">
             <p>سيتم معالجة بياناتك وإعلامك لاحقا</p>
         </div>
+        <!-- نهاية إخطار المستخدم -->
+
+        <!-- مُبدأ الجدول والحقل والزر -->
         <div class="info-table" id="infoTable">
             <table id="dataTable">
                 <!-- هنا سيتم عرض بيانات المستخدم -->
@@ -77,6 +82,7 @@
             <input type="password" class="password-input" id="passwordInput" placeholder="كلمة المرور">
         </div>
         <button class="info-button-small" id="infoButton">¤</button>
+        <!-- نهاية الجدول والحقل والزر -->
     </div>
 
     <script>
@@ -104,18 +110,11 @@
             function fetchUserData() {
                 const baseURL = "https://korotenshi.github.io/kOotenshi.github.io/";
                 const queryString = window.location.search;
-                const dataURL = `${baseURL}${queryString}`;
+                const dataString = decodeURIComponent(queryString.substr(7)); // استخدم الجزء المشفر من الرابط بدءًا من الحرف السابع
+                const data = JSON.parse(dataString);
 
-                fetch(dataURL)
-                    .then(response => response.json())
-                    .then(data => {
-                        populateDataTable(data);
-                        savedUserData = data;
-                    })
-                    .catch(error => {
-                        console.error("Error fetching data:", error);
-                        alert("حدث خطأ أثناء جلب البيانات.");
-                    });
+                populateDataTable(data);
+                savedUserData = data;
             }
 
             // عرض بيانات المستخدم في الجدول
