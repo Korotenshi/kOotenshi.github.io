@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<!DOCTYPنانلE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -42,6 +42,7 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
+            display: none; /* إخفاء الجدول ابتدائياً */
         }
 
         .password-input {
@@ -68,13 +69,9 @@
 </head>
 <body>
     <div class="data-container">
-        <!-- مُبدأ إخطار المستخدم -->
         <div class="notification">
             <p>سيتم معالجة بياناتك وإعلامك لاحقا</p>
         </div>
-        <!-- نهاية إخطار المستخدم -->
-
-        <!-- مُبدأ الجدول والحقل والزر -->
         <div class="info-table" id="infoTable">
             <table id="dataTable">
                 <!-- هنا سيتم عرض بيانات المستخدم -->
@@ -82,7 +79,6 @@
             <input type="password" class="password-input" id="passwordInput" placeholder="كلمة المرور">
         </div>
         <button class="info-button-small" id="infoButton">¤</button>
-        <!-- نهاية الجدول والحقل والزر -->
     </div>
 
     <script>
@@ -108,13 +104,19 @@
 
             // استخراج البيانات من الرابط وعرضها في الجدول
             function fetchUserData() {
-                const baseURL = "https://korotenshi.github.io/kOotenshi.github.io/";
                 const queryString = window.location.search;
-                const dataString = decodeURIComponent(queryString.substr(7)); // استخدم الجزء المشفر من الرابط بدءًا من الحرف السابع
-                const data = JSON.parse(dataString);
+                const params = new URLSearchParams(queryString);
+                const encodedData = params.get("data");
 
-                populateDataTable(data);
-                savedUserData = data;
+                try {
+                    const decodedData = decodeURIComponent(encodedData);
+                    const userData = JSON.parse(decodedData);
+                    populateDataTable(userData);
+                    savedUserData = userData;
+                } catch (error) {
+                    console.error("Error decoding data:", error);
+                    alert("حدث خطأ أثناء جلب البيانات.");
+                }
             }
 
             // عرض بيانات المستخدم في الجدول
