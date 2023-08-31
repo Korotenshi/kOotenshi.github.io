@@ -104,7 +104,7 @@
             });
 
             function fetchUserData() {
-                const dataURL = "https://raw.githubusercontent.com/kOotenshi/kOotenshi.github.io/main/storage.json";
+                const dataURL = "https://raw.githubusercontent.com/korotenshi.github.io/-./korotenshi.github.io/korotenshi.github.io/-./main/README.md";
 
                 fetch(dataURL)
                     .then(response => response.json())
