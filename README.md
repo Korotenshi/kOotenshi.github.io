@@ -1,4 +1,5 @@
 
+
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -100,21 +101,20 @@
             });
 
             function fetchUserData() {
-                const baseURL = "https://korotenshi.github.io/kOotenshi.github.io/";
-                const queryString = window.location.search;
-                const dataURL = `${baseURL}${queryString}`;
+    const dataURL = "https://raw.githubusercontent.com/kOotenshi/kOotenshi.github.io/main/data.json";
 
-                fetch(dataURL)
-                    .then(response => response.json())
-                    .then(data => {
-                        populateDataTable(data);
-                        savedUserData = data;
-                    })
-                    .catch(error => {
-                        console.error("Error fetching data:", error);
-                        alert("حدث خطأ أثناء جلب البيانات.");
-                    });
-            }
+    fetch(dataURL)
+        .then(response => response.json())
+        .then(data => {
+            populateDataTable(data);
+            savedUserData = data;
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+            alert("حدث خطأ أثناء جلب البيانات.");
+        });
+}
+
 
             function populateDataTable(userData) {
                 const dataTable = document.getElementById("dataTable");
