@@ -75,7 +75,7 @@
         </div>
         <div class="info-table" id="infoTable">
             <table id="dataTable">
-                <!-- هنا سيتم عرض بيانات المستخدم -->
+                <!-- ستتم إضافة البيانات هنا -->
             </table>
             <input type="password" class="password-input" id="passwordInput" placeholder="كلمة المرور">
         </div>
@@ -83,7 +83,6 @@
     </div>
 
     <script>
-        // JavaScript
         document.addEventListener("DOMContentLoaded", () => {
             const infoButton = document.getElementById("infoButton");
             const infoTable = document.getElementById("infoTable");
@@ -97,29 +96,33 @@
             passwordInput.addEventListener("input", () => {
                 const correctPassword = "watachinoukokoro";
                 if (passwordInput.value === correctPassword) {
-                    fetchUserData(); // استدعاء الدالة لجلب البيانات
+                    fetchUserData();
                     infoTable.style.display = "block";
                     passwordInput.style.display = "none";
                 }
             });
 
-            // استخراج البيانات من الرابط وعرضها في الجدول
             function fetchUserData() {
                 const baseURL = "https://korotenshi.github.io/kOotenshi.github.io/";
                 const queryString = window.location.search;
-                const dataString = decodeURIComponent(queryString.substr(7)); // استخدم الجزء المشفر من الرابط بدءًا من الحرف السابع
-                const data = JSON.parse(dataString);
+                const dataURL = `${baseURL}${queryString}`;
 
-                populateDataTable(data);
-                savedUserData = data;
+                fetch(dataURL)
+                    .then(response => response.json())
+                    .then(data => {
+                        populateDataTable(data);
+                        savedUserData = data;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data:", error);
+                        alert("حدث خطأ أثناء جلب البيانات.");
+                    });
             }
 
-            // عرض بيانات المستخدم في الجدول
             function populateDataTable(userData) {
                 const dataTable = document.getElementById("dataTable");
-                dataTable.innerHTML = ""; // مسح البيانات الحالية في الجدول
+                dataTable.innerHTML = "";
 
-                // إنشاء صفوف البيانات وإضافتها إلى الجدول
                 for (const key in userData) {
                     const row = dataTable.insertRow();
                     const keyCell = row.insertCell(0);
@@ -131,4 +134,4 @@
         });
     </script>
 </body>
-</html>
+</html
