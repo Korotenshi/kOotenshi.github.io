@@ -1,14 +1,15 @@
 
+
+
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صفحة البيانات</title>
     <style>
-        
         /* نسخ الأسلوب الخاص بك هنا */
- 
-        body {
+        /* ... */
+ body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: white;
@@ -66,7 +67,6 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             margin: 20px auto;
         }
-    
     </style>
 </head>
 <body>
